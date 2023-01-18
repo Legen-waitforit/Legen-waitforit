@@ -43,18 +43,22 @@ SingleInstance* SingleInstance::getInstance(){
     }
     return m_SingleInstance;
 }
+
 void SingleInstance::deleteInstance(){
     if(m_SingleInstance){
         delete m_SingleInstance;
         m_SingleInstance = NULL;
     }
 }
+
 void SingleInstance::Print(){
     cout << "实例内存地址为 ： " << this << endl;
 }
+
 SingleInstance::SingleInstance(){
     cout << "构造函数" << endl;
 }
+
 SingleInstance::~SingleInstance(){
     cout << "析构函数" << endl;
 }
@@ -74,7 +78,8 @@ void* PrintHello(void* threadid){
     pthread_exit(NULL);
 }
 
-#define NUM_THREADS 2
+#define NUM_THREADS 5
+
 int main(void){
 
     pthread_t threads[NUM_THREADS] ={0};
@@ -85,14 +90,17 @@ int main(void){
     
     cout << "...main()..." << endl;
 
-    for (int i=0; i< NUM_THREADS ; i++){
-        cout << "main()...create..threads[" << i << "]"  << endl;
+    for (i=0; i< NUM_THREADS ; i++){
+        cout << "...create..threads[" << i << "]"  << endl;
         indexes[i] = i;//保存i的值到数组中
 
         ret = pthread_create(&threads[i],NULL,PrintHello,(void*)&(indexes[i]));
         if(ret){
             cout << "Can't create thread " << ret << endl;
             exit(-1);
+        }else
+        {
+            cout << "......" << endl;
         }
         
     }
