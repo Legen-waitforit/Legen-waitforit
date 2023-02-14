@@ -1,0 +1,1 @@
+/usr/bin/c++   -g -lboost_thread -lboost_system  -rdynamic CMakeFiles/boost_thread.dir/boost_thread.o  -o boost_thread 
